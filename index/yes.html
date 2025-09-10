@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>YES! 💖</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: 'Arial', sans-serif;
+      background-color: #fde4e4;
+      overflow: hidden;
+    }
+
+    /* Centered Screens */
+    #gif-container, #message, #final-screen {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      width: 100%;
+      flex-direction: column;
+      position: absolute;
+      top: 0;
+      left: 0;
+      transition: all 0.3s ease;
+    }
+
+    #gif-container img {
+      width: 280px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    }
+
+    #message {
+      font-size: 24px;
+      color: #d6336c;
+      font-weight: bold;
+      text-align: center;
+      padding: 20px;
+      display: none;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    #final-screen {
+      display: none;
+      background: url('images/final-bg.png') no-repeat center center;
+      background-size: cover;
+      position: relative;
+    }
+
+    /* Top-Right Navigation */
+    .nav {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      display: flex;
+      gap: 25px;
+      font-weight: bold;
+      font-size: 16px;
+      z-index: 10;
+    }
+
+    .nav a {
+      text-decoration: none;
+      color: #ffffff;
+      padding: 6px 12px;
+      background-color: rgba(0, 150, 200, 0.8);
+      border-radius: 5px;
+      transition: background 0.3s;
+      cursor: pointer;
+    }
+
+    .nav a:hover {
+      background-color: rgba(0, 150, 200, 1);
+    }
+
+    #center-image-container {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1;
+    }
+    #bottom-text {
+  position: absolute;
+  bottom: 30px;
+  width: 100%;
+  text-align: center;
+  font-size: 22px;
+  font-weight: bold;
+  color: #ffffff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  animation: fadeIn 2s ease;
+  z-index: 5;
+  letter-spacing: 1px;
+}
+
+
+    #centerImage {
+      width: 280px;
+      max-width: 90%;
+      border-radius: 15px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+    }
+
+    /* Bubble Messages on Left */
+    .bubble-container {
+      position: absolute;
+      left: 40px;
+      top: 150px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      align-items: flex-start;
+    }
+
+    .bubble {
+      background-color: #ffffff;
+      padding: 14px 20px;
+      border-radius: 20px 20px 20px 0;
+      max-width: 280px;
+      font-size: 18px;
+      color: #333;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+      animation: fadeIn 0.6s ease;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .nav {
+        top: 10px;
+        right: 10px;
+        gap: 15px;
+        font-size: 14px;
+      }
+
+      .bubble {
+        font-size: 16px;
+        max-width: 220px;
+      }
+
+      .bubble-container {
+        left: 20px;
+        top: 120px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 1. GIF Section -->
+  <div id="gif-container">
+    <img src="images/c.jpg" alt="Cute GIF" />
+  </div>
+
+  <!-- 2. Message Section -->
+  <div id="message">
+    ready nani akong cooking skills<br />ari miss IT ang mosogo nalang kulang HAHAHAHA 😍
+  </div>
+
+  <!-- 3. Final Page -->
+  <div id="final-screen">
+    <!-- Navigation in top right -->
+    <div class="nav">
+      <a href="#" data-section="home">HOME</a>
+      <a href="#" data-section="memories">MEMORIES</a>
+      <a href="#" data-section="letters">LETTERS</a>
+    </div>
+
+    <!-- Love messages on left side -->
+    <div class="bubble-container">
+      <div class="bubble">Hello! Darlyn Tejada Villaver</div>
+      <div class="bubble">dinakoNEMOlab?HAHAHAHAH</div>
+      <div class="bubble">there are so many fishes in the sea but my heart is finding nemo</div>
+      <div class="bubble">sogbaon bi</div>
+    </div>
+
+    <!-- 🖼️ New Centered Image -->
+    <!-- 🖼️ New Centered Image -->
+<div id="center-image-container">
+  <img id="centerImage" src="images/r.jpg" alt="Love Picture" />
+</div>
+
+<!-- Bottom Center Text -->
+<div id="bottom-text">LIVE, LAUGH, LOVE MISS IT 💖</div>
+
+  </div>
+
+  <script>
+    // 1. Show message after GIF
+    setTimeout(() => {
+      document.getElementById('gif-container').style.display = 'none';
+      document.getElementById('message').style.display = 'flex';
+
+      // 2. After 2 more seconds, show final screen
+      setTimeout(() => {
+        document.getElementById('message').style.display = 'none';
+          document.getElementById('final-screen').style.display = 'flex';
+      }, 4000);
+    }, 2000);
+
+    // Bubble data and image for each section
+    const sections = {
+      home: {
+        bubbles: [
+          "Hello! Darlyn Tejada Villaver",
+          "dinakoNEMOlab?HAHAHAHAH",
+          "there are so many fishes in the sea but my heart is finding nemo",
+          "sogbaon bi HAHAHAHA"
+        ],
+        image: "images/r.jpg",
+        background: "images/final-bg.png"
+      },
+      memories: {
+        bubbles: [
+          "In the first place palang i do really have attachements to you po, sorry sa misunderstanding love2 <3",
+          "awa ng lips nimo ako sad na botangan og daghan HAHAHAHA",
+          "Miss nako imong cute nga ngisi! ah gara a ahhhh "
+        ],
+        image: "images/w.jpg",
+        background: "images/memories-bg.jpg"
+      },
+      letters: {
+        bubbles: [
+          "Dear love, thank you for being you. 💌",
+          "If pwede lang permi ta magkuyog noh?murag sakit man imong kusi love hehe",
+          "Barilin mo nga ako ng pagmamahal lods 😭😭😭"
+        ],
+        image: "images/q.jpg",
+        background: "images/letters-bg.jpg"
+      }
+    };
+
+    // Navigation click handler
+    document.querySelectorAll('.nav a').forEach(link => {
+      link.addEventListener('click', e => {
+        e.preventDefault();
+
+        const section = link.getAttribute('data-section');
+        const data = sections[section];
+        if (!data) return; // safety check
+
+        // Update bubbles
+        const bubbleContainer = document.querySelector('.bubble-container');
+        bubbleContainer.innerHTML = ''; // clear old bubbles
+        data.bubbles.forEach(text => {
+          const bubble = document.createElement('div');
+          bubble.className = 'bubble';
+          bubble.innerText = text;
+          bubbleContainer.appendChild(bubble);
+        });
+
+        // Update center image
+        const centerImage = document.getElementById('centerImage');
+        centerImage.src = data.image;
+
+        // Update background
+        const finalScreen = document.getElementById('final-screen');
+        finalScreen.style.background = `url('${data.background}') no-repeat center center`;
+        finalScreen.style.backgroundSize = 'cover';
+      });
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Be My Valentine</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: 'Arial', sans-serif;
+      background-color: #fde4e4;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .container-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+    }
+
+    .container {
+      background-color: #fff0f5;
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      max-width: 400px;
+      width: 90%;
+      position: relative;
+      z-index: 1;
+    }
+
+    img#mainCat {
+      width: 150px;
+      height: auto;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      margin: 0 0 10px;
+      font-size: 26px;
+      color: #d6336c;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    #yesBtn {
+      background-color: #ff6f91;
+      color: white;
+      z-index: 2;
+    }
+
+    #noBtn {
+      background-color: #ccc;
+      color: #333;
+      position: relative;
+      z-index: 2;
+    }
+
+    .floating {
+      position: absolute !important;
+    }
+
+    .love-text {
+      position: absolute;
+      font-size: 18px;
+      color: #ff4d6d;
+      font-weight: bold;
+      animation: fadeIn 0.5s ease-out;
+      white-space: nowrap;
+      z-index: 5;
+    }
+
+    .gif-img {
+      position: absolute;
+      width: 100px;
+      height: auto;
+      border-radius: 8px;
+      z-index: 4;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: scale(0.8);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container-wrapper">
+    <div class="container">
+      <!-- Initial cat image with ID -->
+      <img id="mainCat" src="images/c.png" alt="Cute Cat">
+      <h1>og kong ako nalang diay? 🥺</h1>
+      <div class="buttons">
+        <button id="yesBtn">Yes!</button>
+        <button id="noBtn">No</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const noBtn = document.getElementById('noBtn');
+    const yesBtn = document.getElementById('yesBtn');
+    const mainCat = document.getElementById('mainCat');
+    let yesBtnSize = 16;
+    let currentLoveText = null;
+    let currentGif = null;
+    let firstNoClick = true;
+
+    const lovePhrases = [
+      "Yes please, andam nakos imong mga sugo puhon HAHAHAH 💖",
+      "miss IT yes na bah, sige raba kag pangusi yw 🥺",
+      "sige na bah, e hug lage teka HAHAHAHAH 💘",
+      "miss IT uy yes na bah sige na 💞",
+      "magbinoutan nako dinako mag igat ayjokeHAHAHAA💌",
+      "Basta dimo Yes sod tekas akong bag huhu 💗",
+    ];
+
+    // Array of your 6 GIF image paths
+    const gifImages = [
+      'images/sad.png',
+      'images/z.jpg',
+      'images/v.jpg',
+      'images/n.png',
+      'images/b.jpg',
+      'images/m.jpg'
+    ];
+
+    noBtn.addEventListener('click', () => {
+      // First click: remove main cat image
+      if (firstNoClick) {
+        mainCat.style.display = 'none';
+        firstNoClick = false;
+      }
+
+      // Make No button float
+      if (!noBtn.classList.contains('floating')) {
+        document.body.appendChild(noBtn);
+        noBtn.classList.add('floating');
+      }
+
+      // Move No button randomly
+      const btnWidth = noBtn.offsetWidth;
+      const btnHeight = noBtn.offsetHeight;
+      const maxX = window.innerWidth - btnWidth;
+      const maxY = window.innerHeight - btnHeight;
+      const randomX = Math.floor(Math.random() * maxX);
+      const randomY = Math.floor(Math.random() * maxY);
+      noBtn.style.left = `${randomX}px`;
+      noBtn.style.top = `${randomY}px`;
+
+      // Enlarge Yes button
+      yesBtnSize += 4;
+      yesBtn.style.fontSize = `${yesBtnSize}px`;
+
+      // Remove previous love text if exists
+      if (currentLoveText) {
+        currentLoveText.remove();
+      }
+
+      // Remove previous GIF if exists
+      if (currentGif) {
+        currentGif.remove();
+      }
+
+      // Create and show new GIF
+      const gifSrc = gifImages[Math.floor(Math.random() * gifImages.length)];
+const gifElement = document.createElement('img');
+gifElement.src = gifSrc;
+gifElement.className = 'gif-img';
+
+document.body.appendChild(gifElement);
+currentGif = gifElement;
+
+
+      const gifWidth = 100;
+      const gifHeight = 100;
+      const gifX = Math.floor(Math.random() * (window.innerWidth - gifWidth));
+      const gifY = Math.floor(Math.random() * (window.innerHeight - gifHeight));
+      gifElement.style.left = `${gifX}px`;
+      gifElement.style.top = `${gifY}px`;
+
+      document.body.appendChild(gifElement);
+      currentGif = gifElement;
+
+      // Create and show love text
+      const phrase = lovePhrases[Math.floor(Math.random() * lovePhrases.length)];
+      const loveText = document.createElement('div');
+      loveText.className = 'love-text';
+      loveText.innerText = phrase;
+
+      const textX = Math.floor(Math.random() * (window.innerWidth - 200));
+      const textY = Math.floor(Math.random() * (window.innerHeight - 30));
+      loveText.style.left = `${textX}px`;
+      loveText.style.top = `${textY}px`;
+
+      document.body.appendChild(loveText);
+      currentLoveText = loveText;
+    });
+
+    yesBtn.addEventListener('click', () => {
+      window.location.href = "yes.html";
+    });
+  </script>
+
+</body>
+</html>
